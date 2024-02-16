@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+</head>
+<body>
+
+    <h1> Sitio Web con Maria Fernanda</h1>
+</hr>
+<ul>
+        <li><a href="/admin">Administador</a></li>    
+        <li><a href="/inicio">Inicio</a></li>
+        <li><a href="/clase">Años desde el 2024 al 2025</a></li>
+        <li><a href="/contacto">Contacto</a></li>
+        <li><a href="/holaMundo">Hello World</a></li>
+        <li><a href="/saludo">Saludo</a></li>
+        <li><a href="/presentacion">Sobre mi</a></li>
+        <li><a href="/productosyservicios">Productos y Servicios</a></li>
+        <li><a href="/acercaDe">Quienes somos</a></li>
+</ul> 
+<hr>
+<div id="content">
+    {% block content %}
+    {{ block.super }}
+        <h1>Este es un contenido original</h1>
+    {% endblock %}
+</div>
+<footer>Master del Framework Django &copy; Maria Fernanda :D</footer>
+</body>
+</html>

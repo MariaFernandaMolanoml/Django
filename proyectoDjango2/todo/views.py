@@ -3,16 +3,6 @@ from.models import Tarea
 from.forms import TareaForm
 # Create your views here.
 
-layout="""
-        <h1> Sitio Web con Maria Fernanda</h1>
-        </hr>
-        <ul>
-            <li><a href="/agregar">Agregar</a> </li>
-            <li><a href="/admin">Admin</a> </li>
-        </ul> 
-"""
-
-
 def home(request):
     tareas=Tarea.objects.all()
     context={'tareas':tareas}
@@ -93,7 +83,25 @@ def clase(request):
         year+=1
     template +=""" </ul><hr> """
     
-    return HttpResponse(layout+template)
+    return render(request,'todo/index.html')
+
+def inicio(request):
+    return render(request,'inicio.html')
+
+def holaMundo(request):
+    return render(request,'holaMundo.html')
+
+def saludo(request):
+    return render(request,'saludo.html')
+
+def presentacion(request):
+    return render(request,'presentacion.html')
+
+def quienesSomos(request):
+    return render(request, 'acercaDe.html')
+
+def productosyservicios(request):
+    return render (request, 'productosyservicios.html')
 
 
 def contacto(request, nombre="", apellido=""):
@@ -111,7 +119,9 @@ def contacto(request, nombre="", apellido=""):
         html= "<h2> Sin nombre y apellidos definidos </h2>"
 
 
-    contact= """
+    contacto= """
             Bienvenido al apartado de contactos :
             """
-    return HttpResponse(layout+contact+f"<h2>Contacto </2>"+html)
+    # return HttpResponse(contacto+f"<h2>Contacto </2>"+html)
+    return render(request,'todo/contacto.html')
+
