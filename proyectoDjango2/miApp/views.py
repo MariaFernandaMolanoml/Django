@@ -24,6 +24,7 @@ def clase(request):
                 <p>Años desde el 2024 al 2050</p>
                 <ul>
              """
+    
     year=2024
     while year<=2050:
         template += f"<li> {str(year)} </li>"
@@ -41,7 +42,6 @@ def clase(request):
             template += f"<li> {str(year)}</li>"
         year+=1
     template +="""</ul><hr> """ 
-
 
     template +=""" 
                 <p> Años impares</p>
@@ -65,8 +65,14 @@ def clase(request):
             template+= f"<li>{str(year)}</li>"
         year+=1
     template +=""" </ul><hr> """
+    nombre='Maria Fernanda'
     
-    return render(request,'años.html')
+
+    return render(request,'años.html',{
+        'mi_variable':'soy un gato que esta en la vista',
+        'titulo':'Inicio',
+        'name':nombre
+    })
 
 def contacto(request, nombre="", apellido=""):
     html=""

@@ -4,7 +4,16 @@ Años
 {%endblock%}
 {%block content%}
 {{block.super}}
-<h1> Inicio</h1>
+<h1>{{titulo}}</h1>
+{{mi_variable }}
+{%if name%}
+    <br>
+<p>{{name}}</p>
+
+{% else %}
+<strong>Nombre no existe</strong>
+
+{% endif %}
             <p>Años desde el 2024 al 2050</p>
 {%endblock%}
                 
