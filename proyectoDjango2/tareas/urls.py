@@ -19,5 +19,6 @@ from django.urls import path,include
 from todo import views
 
 urlpatterns = [
-    path("", include ("todo.urls")),
+    path ("", include ("todo.urls")),
+    path ("", include ("miApp.urls")),
 ]

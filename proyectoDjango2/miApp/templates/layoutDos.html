@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css'%}">
+    <title>
+        {% block title %}
+
+        {% endblock %}
+    </title>
+</head>
+    <body>
+        <header>
+            <div class="logotipo">
+                <img src="{% static 'img/logo.png'%}" alt="">
+                <h1>Sitio Web con Django <br>| Maria Fernanda Molano |</h1>
+            </div>
+        </header>
+        <nav>
+            <ul>
+                <li><a target="_blank" href="/admin">Administador</a></li>    
+                <li><a href="/inicio">Inicio</a></li>
+                <li><a href="/clase">Años desde el 2024 al 2025</a></li>
+                <li><a href="/contacto">Contacto</a></li>
+                <li><a href="/holaMundo">Hello World</a></li>
+                <li><a href="/saludo">Saludo</a></li>
+                <li><a href="/presentacion">Sobre mi</a></li>
+                <li><a href="/productosyservicios">Productos y Servicios</a></li>
+                <li><a href="/acercaDe">Quienes somos</a></li>
+        </ul>  
+        </nav>
+        <div class="barra">
+            <span class="izq"></span>
+            <span class="relleno"></span>
+            <span class="der"></span>
+        </div>
+
+        <section class="secciones">
+            {%block seccion%}
+
+            {%endblock%}
+        </section>
+        
+        <div id="content">
+            <h2 class="title">Titulo de Prueba</h2>
+            {% block content %}
+                <strong>Contenido del bloque original</strong>
+            {{ block.super }}
+                <h1>Este es un contenido original</h1>
+            {% endblock %}
+        </div>
+
+    <footer>Master del Framework Django &copy; Maria Fernanda :D</footer>
+    </body>
+</html>
