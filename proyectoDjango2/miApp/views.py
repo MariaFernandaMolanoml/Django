@@ -70,7 +70,7 @@ def clase(request):
 
     return render(request,'años.html',{
         'mi_variable':'soy un gato que esta en la vista',
-        'titulo':'Inicio',
+        'titulo':'Años',
         'name':nombre
     })
 

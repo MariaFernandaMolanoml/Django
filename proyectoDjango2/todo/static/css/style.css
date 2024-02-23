@@ -135,6 +135,10 @@ footer{
 
 /* CSS PROPIO */
 
+.centrado {
+  text-align: center;
+  margin: 0 auto;
+}
 
 #textSup{
     text-align: center;
