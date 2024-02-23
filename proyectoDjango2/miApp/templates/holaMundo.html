@@ -4,4 +4,10 @@ Hola Mundo
 {%endblock%}
 {%block content%}
 <h1>Hola Mundo</h1>
+<ul>
+    {% for elemento in lista %}
+        <li>{{ elemento }} {{forloop.counter}}</li>
+    {% endfor %}
+</ul>
+
 {%endblock%}

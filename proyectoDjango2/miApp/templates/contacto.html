@@ -8,6 +8,13 @@
 </div>
 {%endblock%}
 {% block content %}
+
+<h1 class="title"> Pagina de mi web</h1>
+<p>{{"Creado por Maria Fernanda"|cut:''}}</p>
+{{texto|default:"No hay texto"}}
+<p>{{'colombia'|lower}}</p>
+<p>{{'COLOMBIA'|upper}}</p>
+
 <h2>Contactanos</h2>
 <form class="minimalist-form">
     <div class="form-group">
@@ -28,4 +35,5 @@
     </div>
     <button type="button" class="btn btn-primary">Enviar</button>
 </form>
+    
 {% endblock %}

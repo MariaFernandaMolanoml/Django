@@ -2,19 +2,47 @@
 {%block title%}
 Años
 {%endblock%}
-{%block content%}
-<h1>{{titulo}}</h1>
-{{mi_variable }}
-{%if name%}
-    <br>
-<p>{{name}}</p>
 
-{% else %}
-<strong>Nombre no existe</strong>
 
-{% endif %}
-            <p>Años desde el 2024 al 2050</p>
+{% block content %}
+
+            {% comment %} <h1>{{titulo}}</h1>
+            {{mi_variable }}
+            {%if name%}
+                <br> {% endcomment %}
+            <p>{{name}}</p>
+
+            <h2>Años desde el 2024 al 2050</h2>
+            <ul>
+                {% for año in años %}
+                    <li>{{ año }}</li>
+                {% endfor %}
+            </ul>
+        
+            <h2>Años Pares</h2> 
+            <ul>
+                {% for año in añosPares %}
+                    <li>{{ año }}</li>
+                {% endfor %}
+            </ul>
+        
+            <h2>Años Impares</h2>
+            <ul>
+                {% for año in añosImpares %}
+                    <li>{{ año }}</li>
+                {% endfor %}
+            </ul>
+        
+            <h2>Años Bisiestos</h2>
+            <ul>
+            {% for año in añosBisiestos %}
+                    <li>{{ año }}</li>
+            {% endfor %}
+            </ul>
+            
+
+{%include 'fechaActual.html'%} 
 {%endblock%}
-                
+               
 
 

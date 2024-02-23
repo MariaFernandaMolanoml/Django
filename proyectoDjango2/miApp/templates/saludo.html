@@ -4,4 +4,12 @@ Saludo
 {%endblock%}
 {%block content%}
 <h1>Saludo</h1>
+
+<ul>
+    {% for saludo in lista_saludos %}
+        <li>{{ saludo }}</li>
+    {% endfor %}
+</ul>
+
+{%include 'fechaActual.html' with saludo='Hola desde la plantilla'%}
 {%endblock%}

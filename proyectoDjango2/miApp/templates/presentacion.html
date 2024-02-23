@@ -4,4 +4,14 @@ Presentacion
 {%endblock%}
 {%block content%}
 <h1>Presentacion</h1>
+    <ul>
+        {% for aspecto in listaAspectos %}
+            <li>{{ aspecto }}</li>
+        {% endfor %}
+    </ul>
+    <ul>
+        {%for nombre in nombres %}
+            <li>{{nombre}}</li>
+        {% endfor %}
+        </ul>
 {%endblock%}
