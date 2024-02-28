@@ -12,7 +12,7 @@ Saludo
     {% endfor %}
 </ul>
 
-{%include 'fechaActual.html' with saludo='Hola desde la plantilla'%}
+{% include 'fechaActual.html' with saludo='Hola desde la plantilla' %}
 
 {{"Maria Fernanda"|saludo|safe}}
 
