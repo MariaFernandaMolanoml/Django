@@ -1,4 +1,5 @@
 {%extends 'layoutDos.html'%}
+{% load miapp_filters %}
 {%block title%}
 Saludo
 {%endblock%}
@@ -12,4 +13,9 @@ Saludo
 </ul>
 
 {%include 'fechaActual.html' with saludo='Hola desde la plantilla'%}
+
+{{"Maria Fernanda"|saludo|safe}}
+
+{{ True | emoji_booleano }}
+
 {%endblock%}

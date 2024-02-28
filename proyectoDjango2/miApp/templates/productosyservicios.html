@@ -1,4 +1,5 @@
 {%extends 'layoutDos.html'%}
+{% load miapp_filters %}
 {%block title%}
 PyS
 {%endblock%}
@@ -10,4 +11,6 @@ PyS
 {%endblock%}
 {%block content%}
 <h1>productos y servicios</h1>
+
+{{ 100 | descuento:20 }}
 {%endblock%}
