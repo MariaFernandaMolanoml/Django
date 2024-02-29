@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect,HttpResponse
+from miApp.models import Article
 # Create your views here.
 
 def inicio(request):
@@ -102,5 +103,35 @@ def contacto(request, nombre="", apellido=""):
 # year=2024
 # hasta=range(year,2050)
 
+def crearArticulo(request,title,content,public):
+    articulo=Article(
+    title= title,
+    content= content,
+    public= public,
+    )
+    articulo.save()
+    return HttpResponse(f"Articulo creado: {articulo.title} - {articulo.content} ")
+
+def articulo(request):
+    try:
+        articulo=Article.objects.get(pk=1, public=True)
+        response= f"Articulo consultado: {articulo.title} - {articulo.content}- Estado{articulo.public} "
+    except:
+        response="<strong>Articulo no encontrado</strong>"
+    return HttpResponse(response)
+
+def editar_articulo(request):
+    articulo=Article.objects.get(pk=6)
+    articulo.content="Novela de Gabo"
+    articulo.title="Los 12 cuentos peregrinos"
+    articulo.public=True
+    articulo.save()
+    return HttpResponse(f"El articulo {articulo.id} de nombre: {articulo.title} ha sido actualizado y se estado es: {articulo.public}")
+
+def articulos(request):
+    articulos=Article.objects.order_by('title')[2:7]
+    return render(request,'articulos.html', {
+        'articulos':articulos
+    })
 
 

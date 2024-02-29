@@ -1,0 +1,25 @@
+{%extends 'layoutDos.html'%}
+{%block title%}
+Vista de articulos
+{%endblock%}
+
+{%block content%}
+<h1>Hola, esta es la lista de articulos</h1>
+
+<ul>
+    {% for article in articulos %}
+        <li> 
+    <strong>Codigo:</strong>{{ article.id }}
+    <br>
+    <strong>Titulo: </strong>{{ article.title }}
+    <br>
+    <strong>Contenido:</strong>{{ article.content }}
+    <br>
+    <strong>Estado:</strong>{{ article.public }}
+    <hr>
+    </li>
+    <br>
+    {% endfor %}
+</ul>
+
+{%endblock%}
