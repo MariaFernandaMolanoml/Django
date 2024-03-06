@@ -19,4 +19,5 @@ urlpatterns = [
     path('articulo/',views.articulo,name="articulo"),
     path('editar_articulo/',views.editar_articulo,name="editar_articulo"),
     path('articulos/', views.articulos, name= "articulosLista"),
+    path('borrar_articulos/<int:id>', views.borrar_articulos, name= "borrar_articulos"),
 ]

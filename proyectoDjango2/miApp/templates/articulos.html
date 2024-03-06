@@ -13,13 +13,30 @@ Vista de articulos
     <br>
     <strong>Titulo: </strong>{{ article.title }}
     <br>
+    
     <strong>Contenido:</strong>{{ article.content }}
     <br>
-    <strong>Estado:</strong>{{ article.public }}
+    <strong>Estado:</strong>
+    {%if article.public%}
+        <strong class="publicado">Publicado</strong>
+    {%else%}
+            <strong class="privado">Privado</strong>
+    {%endif%}
+    
+    <br>
+    <span>{{article.create_date}}</span>
+    <br>
+    <br>
+    <div class="lista a">
+        <a href="{% url 'borrar_articulos' article.id %}" class="eliminar-boton">Eliminar</a>
+    </div>
+    <br>
     <hr>
     </li>
     <br>
+
     {% endfor %}
+
 </ul>
 
 {%endblock%}

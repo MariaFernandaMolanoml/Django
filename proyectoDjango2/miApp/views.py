@@ -129,9 +129,23 @@ def editar_articulo(request):
     return HttpResponse(f"El articulo {articulo.id} de nombre: {articulo.title} ha sido actualizado y se estado es: {articulo.public}")
 
 def articulos(request):
-    articulos=Article.objects.order_by('title')[2:7]
-    return render(request,'articulos.html', {
+    articulos=Article.objects.order_by('id')
+    #articulos=Article.objects.filter(public=True,id=5)
+    #Lookups en Django
+    #articulos=Article.objects.filter(title__contains="analisis y desarrollo de software")
+    #articulos=Article.objects.filter(title__iexact="analisis y desarrollo de software")
+    #articulos=Article.objects.filter(id__gt=9)
+    #articulos=Article.objects.filter(id__in=[1,17,19])
+    #articulos=Article.objects.filter(id__range=(3,6))
+    #articulos=Article.objects.filter(title__contains="Ana").exclude(public=True)
+
+    return render(request,'articulos.html', { 
         'articulos':articulos
     })
 
 
+def borrar_articulos(request, id):
+    # articulos= Article.objects.raw("DELETE FROM miapp_article where id=7")
+    articulos=Article.objects.get(pk=id)
+    articulos.delete()
+    return redirect ('articulosLista')
