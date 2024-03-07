@@ -1,5 +1,7 @@
 from django.shortcuts import render,redirect,HttpResponse
 from miApp.models import Article
+from django.db import connection
+from django.db.models import Q
 # Create your views here.
 
 def inicio(request):
@@ -138,6 +140,7 @@ def articulos(request):
     #articulos=Article.objects.filter(id__in=[1,17,19])
     #articulos=Article.objects.filter(id__range=(3,6))
     #articulos=Article.objects.filter(title__contains="Ana").exclude(public=True)
+    articulos=Article.objects.filter(Q(title__contains="analisis")|Q(public=0))
 
     return render(request,'articulos.html', { 
         'articulos':articulos
@@ -149,3 +152,28 @@ def borrar_articulos(request, id):
     articulos=Article.objects.get(pk=id)
     articulos.delete()
     return redirect ('articulosLista')
+
+def editar_articulo_sql(request, id, title, content, public):
+    with connection.cursor() as cursor:
+        cursor.execute("UPDATE miapp_Article SET title=%s, content=%s, public=%s WHERE id=%s", [title, content, public, id])
+    return redirect('articulosLista')
+
+def eliminar_articulo_sql(request, id):
+    with connection.cursor() as cursor:
+        cursor.execute("DELETE FROM miapp_article WHERE id=%s", [id])
+    return redirect('articulosLista')
+
+
+def saveArticulo(request):
+    articulo=Article(
+    title= title,
+    content= content,
+    public= public,
+    )
+    articulo.save()
+    return HttpResponse(f"Articulo creado: {articulo.title} - {articulo.content} ")
+
+
+def create_articulo(request):
+    return render(request,'crear_articulo.html')
+

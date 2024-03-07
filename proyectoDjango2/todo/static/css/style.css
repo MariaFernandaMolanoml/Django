@@ -215,7 +215,7 @@ footer{
 }
 
 .imgCont img:hover{
-    background-color: #2ba977be;
+    background-color: #3ab886be;
     transition: all 300ms;
     cursor: pointer;
 }

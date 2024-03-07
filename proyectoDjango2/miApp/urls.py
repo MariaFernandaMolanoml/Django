@@ -20,4 +20,8 @@ urlpatterns = [
     path('editar_articulo/',views.editar_articulo,name="editar_articulo"),
     path('articulos/', views.articulos, name= "articulosLista"),
     path('borrar_articulos/<int:id>', views.borrar_articulos, name= "borrar_articulos"),
+    path('editar-articuloSQL/<int:id>/<str:title>/<str:content>/<str:public>', views.editar_articulo_sql, name="editarArticuloSQL"),
+    path('borrar-articuloSQL/<int:id>', views.eliminar_articulo_sql, name="borrarSQL"),
+    # path('createArticulo/', views.saveArticulo, name="createArticulo"),
+    path('createArticulo/', views.create_articulo, name="create"),
 ]
