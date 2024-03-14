@@ -1,7 +1,12 @@
+from turtle import title
 from django.shortcuts import render,redirect,HttpResponse
 from miApp.models import Article
 from django.db import connection
 from django.db.models import Q
+from miApp.form import FormArticulo
+from django.contrib import messages
+
+
 # Create your views here.
 
 def inicio(request):
@@ -140,11 +145,12 @@ def articulos(request):
     #articulos=Article.objects.filter(id__in=[1,17,19])
     #articulos=Article.objects.filter(id__range=(3,6))
     #articulos=Article.objects.filter(title__contains="Ana").exclude(public=True)
-    articulos=Article.objects.filter(Q(title__contains="analisis")|Q(public=0))
+    # articulos=Article.objects.filter(Q(title__contains="analisis")|Q(public=0))
 
     return render(request,'articulos.html', { 
         'articulos':articulos
     })
+
 
 
 def borrar_articulos(request, id):
@@ -164,16 +170,74 @@ def eliminar_articulo_sql(request, id):
     return redirect('articulosLista')
 
 
+# def saveArticulo(request):
+#     if request.method == 'GET':
+#         title= request.GET['title']
+#         if len(title) <= 5:
+#             return HttpResponse("<h2>El titulo debe ser mayor a 5 caracteres</h2>")
+#         content= request.GET['content']
+#         public= request.GET['public']
+#         articulo=Article(
+#         title= title,
+#         content= content,
+#         public= public,
+#         )
+#         articulo.save()
+#         return HttpResponse(f"Articulo creado: {articulo.title} - {articulo.content} ")
+#     else:
+#         return HttpResponse("<h2>No se ha podido crear el articulo</h2>")
+    
 def saveArticulo(request):
-    articulo=Article(
-    title= title,
-    content= content,
-    public= public,
-    )
-    articulo.save()
-    return HttpResponse(f"Articulo creado: {articulo.title} - {articulo.content} ")
+    if request.method == 'POST':
+        title= request.POST['title']
+        if len(title) <= 5:
+            return HttpResponse("<h2>El titulo debe ser mayor a 5 caracteres</h2>")
+        content= request.POST['content']
+        public= request.POST['public']
+        articulo=Article(
+        title= title,
+        content= content,
+        public= public,
+        )
+        articulo.save()
+        return HttpResponse(f"Articulo creado: {articulo.title} - {articulo.content} ")
+    else:
+        return HttpResponse("<h2>No se ha podido crear el articulo</h2>")
+    
 
 
 def create_articulo(request):
     return render(request,'crear_articulo.html')
+
+
+def create_full_articulo(request):
+    if request.method == 'POST':
+
+        formulario=FormArticulo(request.POST)
+
+        if formulario.is_valid():
+            data_form=formulario.cleaned_data
+            title= data_form.get('title')
+            content= data_form.get('content')
+            public=data_form.get('public')
+
+            articulo=Article(
+            title= title,
+            content= content,
+            public= public,
+            )
+            articulo.save()
+
+            messages.success(request,f'El articulo {articulo.id} se ha guardado satisfactoriamente')
+            return redirect ('articulos')
+        
+            # return HttpResponse(articulo.title + ' - '+ articulo.content +' - '+ str(articulo.public))
+    
+        else:
+            return render(request,'create_full_articulo.html',{'form':formulario})
+
+    else:
+        formulario=FormArticulo()
+        return render(request,'create_full_articulo.html',{'form':formulario})
+       
 

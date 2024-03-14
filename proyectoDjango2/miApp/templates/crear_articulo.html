@@ -4,9 +4,10 @@ Crear articulo
 {%endblock%}
 
 {%block content%}
-<h2>form</h2>
+<h2>Form</h2>
 <br>
-<form action="{%url 'create'%}" method="get">
+<!-- <form action="{%url 'create'%}" method="get"> -->
+<form action="{%url 'create'%}" method="post">
     <label for="title">Titulo del articulo</label>
     <input type="text" name="title" placeholder="Ingrese el titulo">
     <label for="content">Contenido del articulo</label>
@@ -17,6 +18,6 @@ Crear articulo
         <option value="0">No</option>
     </select>
     <input type="submit" name="" id="" value="guardar">
+<!-- </form> -->
 </form>
-
 {%endblock%}

@@ -5,6 +5,11 @@ Vista de articulos
 
 {%block content%}
 <h1>Hola, esta es la lista de articulos</h1>
+{% if messages %}
+    {% for message in messages %}
+        <div class="message">{{message}}</div>
+        {% endfor %}
+    {% endif %}
 
 <ul>
     {% for article in articulos %}
