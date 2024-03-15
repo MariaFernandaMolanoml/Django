@@ -4,44 +4,67 @@ Vista de articulos
 {%endblock%}
 
 {%block content%}
-<h1>Hola, esta es la lista de articulos</h1>
-{% if messages %}
-    {% for message in messages %}
-        <div class="message">{{message}}</div>
-        {% endfor %}
+    {% if messages %}
+        {%for m in messages%}
+            <div class="message">
+                {{m}}
+            </div>
+                <script>
+                        swal({
+                            title: "{{titulo}}",
+                            text: "{{m}}",
+                            icon: "{{icono}}",
+                            buttons: {cancel: "Cancelar",
+                                    confirm: "Aceptar",},
+                        })
+                        .then((willoption) => {
+                            if (willoption) {
+                                swal ("¡Eliminado correctamente!",{
+                                    icon:"success",
+                                });
+                            } else {
+                                swal ("Operacion cancelada.",{
+                                    icon:"info",
+                            });
+                        }
+                        });
+                </script>
+        {% endfor %}    
     {% endif %}
+    <h1>Hola, esta es la lista de articulos</h1>
+ 
 
-<ul>
-    {% for article in articulos %}
-        <li> 
-    <strong>Codigo:</strong>{{ article.id }}
-    <br>
-    <strong>Titulo: </strong>{{ article.title }}
-    <br>
-    
-    <strong>Contenido:</strong>{{ article.content }}
-    <br>
-    <strong>Estado:</strong>
-    {%if article.public%}
-        <strong class="publicado">Publicado</strong>
-    {%else%}
-            <strong class="privado">Privado</strong>
-    {%endif%}
-    
-    <br>
-    <span>{{article.create_date}}</span>
-    <br>
-    <br>
-    <div class="lista a">
-        <a href="{% url 'borrar_articulos' article.id %}" class="eliminar-boton">Eliminar</a>
-    </div>
-    <br>
-    <hr>
-    </li>
-    <br>
+    <ul>
+        {% for article in articulos %}
+            <li> 
+        <strong>Codigo:</strong>{{ article.id }}
+        <br>
+        <strong>Titulo: </strong>{{ article.title }}
+        <br>
+        
+        <strong>Contenido:</strong>{{ article.content }}
+        <br>
+        <strong>Estado:</strong>
+        {%if article.public%}
+            <strong class="publicado">Publicado</strong>
+        {%else%}
+                <strong class="privado">Privado</strong>
+        {%endif%}
+        
+        <br>
+        <span>{{article.create_date}}</span>
+        <br>
+        <br>
+        <div class="lista a">
+            <a href="{% url 'borrar_articulos' article.id %}" class="eliminar-boton">Eliminar</a>
+        </div>
+        <br>
+        <hr>
+        </li>
+        <br>
 
-    {% endfor %}
+        {% endfor %}
 
-</ul>
+    </ul>
 
 {%endblock%}

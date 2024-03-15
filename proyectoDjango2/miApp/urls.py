@@ -1,9 +1,10 @@
 from django.contrib import admin
 from django.urls import path,include
 from .import views
-
+from django .conf import settings
 
 urlpatterns = [
+    path ('admin/', admin.site.urls),
     path('inicio/',views.inicio,name="inicio"),
     path('clase/',views.clase,name="clase"),
     path('contacto/',views.contacto, name="contacto"),
@@ -26,3 +27,7 @@ urlpatterns = [
     path('createArticulo/', views.create_articulo, name="create"),
     path('create-full-articulo/', views.create_full_articulo, name="create_full"),
 ]
+
+if settings.DEBUG:
+    from django.conf.urls.static import static
+    urlpatterns+= static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)

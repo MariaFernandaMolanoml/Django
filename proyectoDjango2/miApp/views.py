@@ -157,17 +157,17 @@ def borrar_articulos(request, id):
     # articulos= Article.objects.raw("DELETE FROM miapp_article where id=7")
     articulos=Article.objects.get(pk=id)
     articulos.delete()
-    return redirect ('articulosLista')
+    return redirect ('articulos')
 
 def editar_articulo_sql(request, id, title, content, public):
     with connection.cursor() as cursor:
-        cursor.execute("UPDATE miapp_Article SET title=%s, content=%s, public=%s WHERE id=%s", [title, content, public, id])
-    return redirect('articulosLista')
+        cursor.execute("UPDATE miApp_Article SET title=%s, content=%s, public=%s WHERE id=%s", [title, content, public, id])
+    return redirect('articulos')
 
 def eliminar_articulo_sql(request, id):
     with connection.cursor() as cursor:
-        cursor.execute("DELETE FROM miapp_article WHERE id=%s", [id])
-    return redirect('articulosLista')
+        cursor.execute("DELETE FROM miApp_article WHERE id=%s", [id])
+    return redirect('articulos')
 
 
 # def saveArticulo(request):
@@ -226,12 +226,16 @@ def create_full_articulo(request):
             content= content,
             public= public,
             )
+            articulos= Article.objects.all().order_by('content')
             articulo.save()
 
             messages.success(request,f'El articulo {articulo.id} se ha guardado satisfactoriamente')
-            return redirect ('articulos')
-        
-            # return HttpResponse(articulo.title + ' - '+ articulo.content +' - '+ str(articulo.public))
+            return render(request,'articulos.html',{
+                'titulo':'Guardado el articulo con Exito',
+                'icono':'success',
+                'boton':'Aceptar',
+                'articulos':articulos
+            })
     
         else:
             return render(request,'create_full_articulo.html',{'form':formulario})
